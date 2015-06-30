@@ -56,6 +56,12 @@ class SwpmAdminRegistration extends SwpmRegistration {
             if (!empty($send_notification)) {
                 $this->send_reg_email();
             }
+
+            /*
+             * -JS- Adding ability to add user to MailChimp list when created through admin interface.
+             */
+            do_action('swpm_admin_registration_complete');
+
             $message = array('succeeded' => true, 'message' => SwpmUtils::_('Registration Successful.'));
             SwpmTransfer::get_instance()->set('status', $message);
             wp_redirect('admin.php?page=simple_wp_membership');
